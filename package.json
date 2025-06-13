@@ -9,7 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@anthropic-ai/claude-code": "latest",
+    "@anthropic-ai/sdk": "^0.20.0",
     "@monaco-editor/react": "^4.6.0",
     "lucide-react": "^0.263.1",
     "next": "14.1.0",

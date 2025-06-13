@@ -14,6 +14,7 @@ export default function Home() {
 
   const handleAnalyzeCode = async () => {
     setLoading(true)
+    setOutput('処理中...')
     try {
       const response = await fetch('/api/claude', {
         method: 'POST',
@@ -24,16 +25,25 @@ export default function Home() {
           language
         })
       })
+      
       const data = await response.json()
-      setOutput(data.result)
+      
+      if (!response.ok) {
+        console.error('API Error:', data)
+        setOutput(`エラー: ${data.error}\n詳細: ${data.details || 'なし'}`)
+      } else {
+        setOutput(data.result || 'レスポンスが空です')
+      }
     } catch (error) {
-      setOutput('エラーが発生しました: ' + error)
+      console.error('Fetch error:', error)
+      setOutput('ネットワークエラーが発生しました: ' + error)
     }
     setLoading(false)
   }
 
   const handleGenerateCode = async (prompt: string) => {
     setLoading(true)
+    setOutput('コード生成中...')
     try {
       const response = await fetch('/api/claude', {
         method: 'POST',
@@ -44,17 +54,26 @@ export default function Home() {
           language
         })
       })
+      
       const data = await response.json()
-      setCode(data.code)
-      setOutput(data.explanation)
+      
+      if (!response.ok) {
+        console.error('API Error:', data)
+        setOutput(`エラー: ${data.error}\n詳細: ${data.details || 'なし'}`)
+      } else {
+        setCode(data.code || '')
+        setOutput(data.explanation || 'コードが生成されました')
+      }
     } catch (error) {
-      setOutput('エラーが発生しました: ' + error)
+      console.error('Fetch error:', error)
+      setOutput('ネットワークエラーが発生しました: ' + error)
     }
     setLoading(false)
   }
 
   const handleImproveCode = async () => {
     setLoading(true)
+    setOutput('コード改善中...')
     try {
       const response = await fetch('/api/claude', {
         method: 'POST',
@@ -65,11 +84,19 @@ export default function Home() {
           language
         })
       })
+      
       const data = await response.json()
-      setCode(data.improvedCode)
-      setOutput(data.suggestions)
+      
+      if (!response.ok) {
+        console.error('API Error:', data)
+        setOutput(`エラー: ${data.error}\n詳細: ${data.details || 'なし'}`)
+      } else {
+        setCode(data.improvedCode || code)
+        setOutput(data.suggestions || '改善が完了しました')
+      }
     } catch (error) {
-      setOutput('エラーが発生しました: ' + error)
+      console.error('Fetch error:', error)
+      setOutput('ネットワークエラーが発生しました: ' + error)
     }
     setLoading(false)
   }

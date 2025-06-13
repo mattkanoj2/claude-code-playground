@@ -1,6 +1,6 @@
 # Claude Code Playground
 
-Claude Code SDKの機能を体験できるインタラクティブなWebアプリケーションです。
+Claude APIを使用したインタラクティブなコードアシスタントアプリケーションです。
 
 ![Claude Code Playground](https://via.placeholder.com/800x400?text=Claude+Code+Playground)
 
