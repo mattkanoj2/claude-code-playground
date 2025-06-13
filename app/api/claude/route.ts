@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
+// @ts-ignore - Claude Code SDK types
 import { query } from '@anthropic-ai/claude-code'
 
 export async function POST(request: NextRequest) {
